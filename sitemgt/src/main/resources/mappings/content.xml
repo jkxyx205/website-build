@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yodean.site.web.content">
+
+	<select id="getArticlesByCondition">
+		SELECT
+		id,
+		title,
+		author,
+		cover,
+		publish_date AS publishDate,
+		DATE_FORMAT(publish_date,'%Y-%m-%d') publishDateString,
+		stick_top AS stickTop,
+		html,
+		content,
+		description,
+		STATUS,
+		category_id categoryId,
+		times_read AS timesRead,
+		order_id AS orderId
+		FROM
+		c_article a
+		WHERE
+		a.category_id = :categoryId
+		AND a.title like :title
+		AND a.status = :status
+		AND a.del_flag = '1'
+
+
+	</select>
+
+
+
+
+	<select id="getPicsByCondition">
+	  	SELECT
+	  	id,
+	title,
+	description,
+	src,
+	full_src as fullSrc,
+	href,
+	seq,
+	category_id AS categoryId,
+	DATE_FORMAT(create_date,'%Y-%m-%d') publishDateString,
+	options
+FROM
+	c_pic p
+WHERE
+	p.category_id = :categoryId
+and p.del_flag = 1
+ORDER  BY p.order_id asc, p.create_date asc
+
+	</select>
+
+	<select id="getVideosByCondition">
+		SELECT
+		id,
+		title,
+		cover,
+		embed,
+		description,
+		category_id AS categoryId,
+		DATE_FORMAT(create_date,'%Y-%m-%d') publishDateString
+		FROM
+		c_video v
+		WHERE
+		v.category_id = :categoryId
+		and v.del_flag = 1
+		ORDER  BY v.order_id asc, v.create_date asc
+
+	</select>
+
+	<select id="getComponents">
+		SELECT
+	c.id,
+	c.title,
+	c.type,
+	c.html,
+	c.options,
+	c.remarks
+FROM
+	w_component c
+WHERE
+	c.del_flag = '1'
+AND c.id = :id
+AND c.type = :type
+order by c.id asc
+	</select>
+
+	<select id="fulltext">
+	select id, cover, title, content , CONCAT('article/', id) as href, 0 as type from c_article a where a.del_flag = '1' and a.status = '1'
+and exists (
+	select 1 from w_site s, w_page p, w_page_component pc where s.id = :webId and s.id = p.web_id and pc.page_id =p.id
+and p.del_flag = '1' and pc.del_flag = '1' and a.category_id = pc.category_id
+)
+union ALL
+select id, src as cover, title, description as content, href, 1 as type from c_pic pp where pp.del_flag = '1'
+and exists (
+	select 1 from w_site s, w_page p, w_page_component pc where s.id = :webId and s.id = p.web_id and pc.page_id =p.id
+and p.del_flag = '1' and pc.del_flag = '1' and pp.category_id = pc.category_id
+)
+union ALL
+select id, cover, title, description as content,CONCAT('video/', id) as href, 2 as type from c_video v where v.del_flag = '1'
+and exists (
+	select 1 from w_site s, w_page p, w_page_component pc where s.id = :webId and s.id = p.web_id and pc.page_id =p.id
+and p.del_flag = '1' and pc.del_flag = '1' and v.category_id = pc.category_id
+)
+	</select>
+
+	<select id="getSiteArticles">
+		SELECT
+		id,
+		title,
+		DATE_FORMAT(publish_date,'%Y-%m-%d') publishDate
+		FROM
+		c_article a
+		WHERE
+		a.del_flag = '1'
+-- 		AND a. STATUS = '1'
+		AND EXISTS (
+		SELECT
+		1
+		FROM
+		w_site s,
+		w_page p,
+		w_page_component pc
+		WHERE
+		s.id = :webId
+		AND s.id = p.web_id
+		AND pc.page_id = p.id
+		AND p.del_flag = '1'
+		AND pc.del_flag = '1'
+		AND a.category_id = pc.category_id
+		AND a.title like :title
+		)
+		ORDER BY stick_top DESC, publish_date DESC
+	</select>
+
+
+	<select id="getPics">
+		SELECT
+	`sys_document`.`id`,
+	`sys_document`.`category_id` AS categoryId,
+	`sys_document`.`size` size,
+	`sys_document`.`ext`,
+	`sys_document`.`content_type` type,
+	`sys_document`.`path`,
+	`sys_document`.`pid`,
+	`sys_document`.`name`
+FROM
+	`sys_document`
+WHERE
+	category_id = :categoryId
+AND web_id = :webId
+AND size > 0
+AND pid = :pid
+AND name like :name
+ORDER BY
+	update_date DESC
+	</select>
+</mapper>

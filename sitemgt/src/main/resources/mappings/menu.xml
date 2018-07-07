@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yodean.site.web.tpl.menu">
+
+	<select id="getMenu">
+		SELECT
+		id,
+		title,
+		pid,
+		link_type,
+		href,
+		case link_type
+		when '0' then 'javascript:;'
+		when '1' then
+		(select CONCAT('/', p.`name`) from w_page p, w_site s where p.id = m.page_id and p.web_id = s.id)
+		else href end as absoluteHref,
+		target,
+		seq,
+		page_id AS pageId,
+		web_id AS webId
+		FROM
+		w_menu m
+		WHERE
+		m.web_id = :webId
+		AND m.del_flag = '1'
+		ORDER BY
+		m.seq ASC
+	</select>
+
+	<select id="getActiveMenuId">
+		SELECT
+		IFNULL(m.pid,m.id) id
+		FROM
+		w_menu m left join w_page p on m.page_id = p.id
+		WHERE
+		m.web_id = :webId
+		and p.name = :pageName
+		and m.del_flag = '1'
+	</select>
+
+</mapper>
+

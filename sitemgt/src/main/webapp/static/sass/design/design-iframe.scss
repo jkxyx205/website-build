@@ -1,0 +1,838 @@
+@import "compass/css3";
+$main-color: #5985ff;
+$split-color: #e7e7eb;
+//reset
+
+body .site-class  .layui-layer-btn .layui-layer-btn0 {
+  background-color: $main-color;
+}
+
+.btn-use {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  //border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  outline: none;
+}
+
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: $main-color;
+  border-color: #1e5aff;
+
+  &:hover {
+    color: #fff;
+    background-color: #0547ff;
+    border-color: #003be0;
+  }
+}
+
+.btn-default {
+  border: 1px solid #d8dde6;
+}
+.btn-group {
+  button {
+    float: left;
+  }
+}
+
+
+#cpn-empty-node {
+  text-align: center;
+  line-height: 200px;
+  color: red;
+
+}
+
+//操作
+body {
+  #layout {
+    &>.container, &>.container-fluid {
+      border: 1px dashed red;
+      cursor: move;
+      //tt
+      padding-top: 15px;
+      margin-bottom: 15px;
+      &:hover {
+        .container-operator {
+          opacity: 1;
+        }
+      }
+    }
+    //tt
+    padding: 30px 0 50px;
+  }
+
+  &.readStatus {
+    //只读设置
+    #layout {
+      padding: 0;
+
+      &>.container, &>.container-fluid {
+        border: none;
+        padding-top: 0;
+        margin-bottom: 0;
+        cursor: auto;
+      }
+    }
+
+    .cpn-placeholder, .section-operator, .container-operator, .panel-mask, .cpn-operator {
+      display: none;
+    }
+
+  }
+}
+
+
+
+//控件操作
+div[class~=cpn] {
+  position: relative;
+
+  .cpn-operator {
+    position: absolute;
+    z-index: 999;
+    right: 15px;
+    top: 10px;
+    opacity: 0;
+  }
+
+  .panel-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    z-index: 99;
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+
+  &:hover {
+    .panel-mask {
+      filter: alpha(opacity=60);
+      opacity: .6;
+    }
+    .cpn-operator {
+      filter: alpha(opacity=100);
+      opacity: 1;
+    }
+  }
+
+  %operator-btn-s {
+      padding: 5px 8px;
+      font-size: 12px;
+      line-height: 14px;
+      color: #fff;
+      vertical-align: baseline;
+      white-space: nowrap;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      border-radius: 2px;
+      margin-left: 10px;
+  }
+
+  .label-edit {
+    background-color: #4f86ed;
+    cursor: pointer;
+    @extend %operator-btn-s;
+  }
+
+  .label-remove{
+    background-color: #db5140;
+    cursor: pointer;
+    @extend %operator-btn-s;
+  }
+
+  .label-set{
+    background-color: #f3be42;
+    cursor: pointer;
+    @extend %operator-btn-s;
+  }
+
+  .label-drag{
+    background-color: #56a55c;
+    @extend %operator-btn-s;
+  }
+
+}
+
+
+#footer-container {
+  .label-remove{
+    display: none;
+  }
+
+  .label-set{
+    display: none;
+  }
+
+  .label-drag{
+    display: none;
+  }
+}
+
+//
+.cpn-placeholder {
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+
+
+  &:hover {
+    background-color: #ccc;
+  }
+}
+
+//拖动
+.portlet-placeholder {
+  border: 1px dashed #444;
+  margin-bottom: 30px;
+  height: 40px;
+  background-color: #ccc;
+  position: relative;
+}
+
+.portlet-placeholder:after {
+  content: "释放到此处";
+  position: absolute;
+  left:0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 40px;
+}
+
+
+
+%layoutBtn {
+  background-color: #0a0a0a;
+  padding: 2px 6px;
+  font-size: 12px;
+
+  span {
+    margin-left: 5px;
+  }
+}
+
+.section-operator {
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  //font-size: 20px;
+  cursor: pointer;
+  z-index: 99999;
+  color: #fff;
+
+  @extend %layoutBtn;
+
+}
+
+
+.container-operator { //容器操作
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  cursor: pointer;
+  opacity: 0;
+  z-index: 99;
+
+
+
+
+  color: #fff;
+
+  &:hover {
+    filter: alpha(opacity=100);
+    opacity: 1;
+  }
+
+  .delete-operator, .insert-operator {
+    float: left;
+    margin-right: 20px;
+    @extend %layoutBtn;
+  }
+}
+
+.design-img-container {
+  padding: 20px 0 0 15px;
+  .design-img-box {
+    img {
+      width: 100%;
+    }
+    position: relative;
+    padding: 5px;
+    //border: 1px solid $main-color;
+    //border-radius: 5px;
+    .design-img-box-mask {
+      position: absolute;
+      left:0;
+      top: 0;
+      background-color: #000;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    button.btn-use {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include translate(-50%, -50%);
+      opacity: 0;
+    }
+
+
+
+    &:hover {
+      .design-img-box-mask {
+        opacity: .3;
+      }
+
+      button {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+.design-img-container.layout-img-container {
+  .design-img-box {
+    position: relative;
+    float: left;
+    width: 99px;
+    height: 118px;
+    margin: 0 15px 15px 0;
+    border: 1px solid #eee;
+    background: transparent url(/static/images/layout-s.png) no-repeat;
+  }
+}
+
+.design-img-container.component-img-container {
+  //background-color: rgb(238, 238, 238);
+  height: 100%;
+  overflow: auto;
+  li {
+    float: left;
+    margin: 0 15px 15px 0;
+    //border: 1px solid $split-color;
+
+    &.active {
+      .design-img-box {
+        border-color: $main-color;
+      }
+
+    }
+  }
+  .design-img-box {
+    position: relative;
+    width: 160px;
+    height: 120px;
+    border: 1px solid #eee;
+    background: transparent url(/static/images/component.png) no-repeat;
+  }
+
+  .image-box-label {
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background-color: #fff;
+  }
+}
+
+
+//-----------------------------------------------------------------------
+.form, .form-vertical {
+  height: 100%;
+  padding-top: 25px;
+  font-size: 12px;
+}
+
+.form input[type=text], .form select {
+  height: 30px;
+  width: 260px;
+}
+
+.form input[type=radio], .form input[type=checkbox] {
+  position: relative;
+  margin-right: 5px;
+  //top: 2px;
+}
+.item-group {
+  margin-bottom: 12px;
+}
+.item-label, .item-control {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.form-vertical .item-label, .form-vertical .item-control {
+  display: block;
+  width: 100%;
+  font-weight: normal;
+  padding: 2px 0;
+}
+
+.form-vertical input[type=text], .form-vertical textarea {
+  width: 100%;
+}
+
+.item-control {
+  padding: 0 5px;
+}
+
+.item-label {
+  //font-weight: bold;
+  /*width: 65px;*/
+  width: 70px;
+}
+
+.item-tip {
+  color: #747474;
+  font-size:12px;
+}
+
+.inner-box {
+  background-color: rgb(238, 238, 238);
+  max-height: 400px;
+  overflow: auto;
+  padding-top: 12px;
+}
+
+
+.item-tab {
+  #b, #c {
+    padding: 15px;
+  }
+  &>ul {
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+
+    li {
+      position: relative;
+      display: inline-block;
+      background-color: #fff;
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+
+      &.active {
+        border: 1px solid #ddd;
+        border-bottom: none;
+        height: 32px;
+        margin-bottom: -1px;
+        //font-weight: bold;
+      }
+    }
+    li a {
+      display: block;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .item-tab-content {
+      padding: 10px;
+    }
+  }
+}
+
+
+
+
+
+.inline-list li {
+  float: left;
+  margin-right:15px;
+  list-style: none;
+}
+
+//设置
+.form-setting input[type=text], .form-setting select {
+  height: 30px;
+  width: 330px;
+}
+
+.form-setting {
+  padding: 15px;
+}
+
+
+//#right-side-dialog ~ .layui-layer-btn {
+//  text-align: left;
+//}
+
+
+
+.top-bar {
+  text-align: center;
+}
+
+#right-side-dialog {
+
+.noUi-horizontal {
+  height: 5px;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 10px;
+  height: 15px;
+  left: -1px;
+  /*top: -13px;*/
+  cursor: pointer;
+}
+
+.noUi-horizontal .noUi-handle:focus {
+  outline: none;
+}
+
+.noUi-horizontal .noUi-tooltip {
+  left: 22px;
+  top: 0;
+  border: none;
+  background: transparent;
+  color: #000;
+  padding: 0;
+
+  height: 15px;
+  line-height: 15px;
+}
+
+.noUi-handle:after, .noUi-handle:before {
+  height: 0;
+  width: 0;
+}
+.noUi-connect {
+  background-color: #00b3ee;
+}
+
+}
+/****************thumbnail******************/
+
+
+.design-img-container.component-img-container .design-img-box {
+  &.component-img-1 {
+    background-position: -160px 0;
+  }
+
+  &.component-img-101 {
+    background-position: 0 -120px;
+  }
+
+  &.component-img-102 {
+    background-position: -160px -120px;
+  }
+
+  &.component-img-103 {
+    background-position: -320px -120px;
+  }
+
+  &.component-img-104 {
+    background-position: -480px -120px;
+  }
+
+  &.component-img-105 {
+    background-position: -640px -120px;
+  }
+
+
+  //文章或图片
+  &.component-img-201 {
+    background-position: 0 -240px;
+  }
+
+  &.component-img-202 {
+    background-position: -160px -240px;
+  }
+
+  &.component-img-203 {
+    background-position: -320px -240px;
+  }
+
+  &.component-img-204 {
+    background-position: -480px -240px;
+  }
+
+  &.component-img-205 {
+    background-position: -5120px -240px;
+  }
+
+  &.component-img-206 {
+    background-position: -5280px -240px;
+  }
+
+
+  &.component-img-251, &.component-img-151 {
+    background-position:  -640px -240px;
+  }
+
+  &.component-img-252, &.component-img-152 {
+    background-position:  -800px -240px;
+  }
+
+  &.component-img-253, &.component-img-153 {
+    background-position:  -960px -240px;
+  }
+
+  &.component-img-254, &.component-img-154 {
+    background-position:  -1120px -240px;
+  }
+
+  &.component-img-255, &.component-img-155 {
+    background-position:  -1280px -240px;
+  }
+
+  &.component-img-256, &.component-img-156 {
+    background-position:  -1440px -240px;
+  }
+
+  &.component-img-257, &.component-img-157 {
+    background-position:  -1600px -240px;
+  }
+
+  &.component-img-258, &.component-img-158 {
+    background-position:  -1760px -240px;
+  }
+
+  &.component-img-259, &.component-img-159 {
+    background-position:  -1920px -240px;
+  }
+
+  &.component-img-260, &.component-img-160 {
+    background-position:  -2080px -240px;
+  }
+
+  &.component-img-261, &.component-img-161 {
+    background-position:  -2240px -240px;
+  }
+
+  &.component-img-262, &.component-img-162 {
+    background-position:  -2400px -240px;
+  }
+
+  &.component-img-263, &.component-img-163 {
+    background-position:  -2560px -240px;
+  }
+
+  &.component-img-264, &.component-img-164 {
+    background-position:  -2720px -240px;
+  }
+  &.component-img-265, &.component-img-165 {
+    background-position:  -2880px -240px;
+  }
+  &.component-img-266, &.component-img-166 {
+    background-position:  -3040px -240px;
+  }
+  &.component-img-267, &.component-img-167 {
+    background-position:  -3200px -240px;
+  }
+  &.component-img-268, &.component-img-168 {
+    background-position:  -3360px -240px;
+  }
+  &.component-img-269, &.component-img-169 {
+    background-position:  -3520px -240px;
+  }
+  &.component-img-270, &.component-img-170 {
+    background-position:  -3680px -240px;
+  }
+  &.component-img-271, &.component-img-171 {
+    background-position:  -3840px -240px;
+  }
+  &.component-img-272, &.component-img-172 {
+    background-position:  -4000px -240px;
+  }
+
+  &.component-img-273, &.component-img-173 {
+    background-position:  -4160px -240px;
+  }
+
+  &.component-img-274, &.component-img-174 {
+    background-position:  -4320px -240px;
+  }
+
+  &.component-img-275, &.component-img-175 {
+    background-position:  -4480px -240px;
+  }
+
+  &.component-img-276, &.component-img-176 {
+    background-position:  -4640px -240px;
+  }
+
+  &.component-img-277, &.component-img-177 {
+    background-position:  -4800px -240px;
+  }
+
+  &.component-img-278, &.component-img-178 {
+    background-position:  -4960px -240px;
+  }
+
+
+
+  /*视频*/
+  &.component-img-301 {
+    background-position: 0 -360px;
+  }
+
+  &.component-img-371 {
+    background-position: -160px -360px;
+  }
+
+  &.component-img-374 {
+    background-position: -320px -360px;
+  }
+  &.component-img-352 {
+    background-position: -480px -360px;
+  }
+
+  &.component-img-356 {
+    background-position: -640px -360px;
+  }
+
+  &.component-img-355 {
+    background-position: -800px -360px;
+  }
+
+  &.component-img-363 {
+    background-position: -960px -360px;
+  }
+
+  &.component-img-369 {
+    background-position: -1120px -360px;
+  }
+
+//
+  &.component-img-401 {
+    background-position: -160px -480px;
+  }
+
+  &.component-img-402 {
+    background-position: 0 -480px;
+  }
+
+//
+  &.component-img-403 {
+    background-position: 0 -600px;
+  }
+
+  &.component-img-404 {
+    background-position: -160px -600px;
+  }
+
+  &.component-img-405 {
+    background-position: -320px -600px;
+  }
+
+  &.component-img-406 {
+    background-position: -480px -600px;
+  }
+
+  &.component-img-407 {
+    background-position: -640px -600px;
+  }
+
+  &.component-img-408 {
+    background-position: -800px -600px;
+  }
+
+  &.component-img-409 {
+    background-position: -960px -600px;
+  }
+
+  &.component-img-410 {
+    background-position: -1120px -600px;
+  }
+
+  &.component-img-411 {
+    background-position: -1280px -600px;
+  }
+
+
+
+//
+  &.component-img-501 {
+    background-position: -320px 0;
+  }
+
+  &.component-img-502 {
+    background-position: -160px 0;
+  }
+
+  &.component-img-503 {
+    background-position: -480px 0;
+  }
+
+  &.component-img-504 {
+    background-position: 0 0;
+  }
+
+  &.component-img-505 {
+    background-position: -640px 0;
+  }
+
+  &.component-img-506 {
+    background-position: -800px 0;
+  }
+
+
+  //end
+
+
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,170 @@
+@import "../base";
+
+
+#inner-page {
+  .children-container {
+    background: none;
+    padding: 15px;
+  }
+  .toolbar {
+    position: absolute;
+    bottom: -70px;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    border-top: 1px solid #e7e7eb;
+    text-align: center;
+    line-height: 70px;
+    background-color: #fff;
+  }
+}
+
+#menu {
+  //position: absolute;
+  z-index: 9;
+
+
+  //width: 100%;
+  a:hover {
+    color: #333;
+  }
+
+  &>ul {
+    background-color: #fff;
+    height: 45px;
+  }
+
+  ul {
+    &.second-menu {
+      display: none;
+    }
+
+    &.second-menu>li {
+      position: relative;
+    }
+
+    &.second-menu a, &.second-menu .add {
+      background-color: #edeff5;
+      //background-color: #fff;
+
+    }
+
+    &.third-menu {
+      display: none;
+      position: absolute;
+      left: 96px;
+      top: 10px;
+    }
+  }
+
+
+  .first-menu-item {
+    float: left;
+  }
+
+  a, .add {
+    display: block;
+    height: 43px;
+    width: 90px;
+    padding: 0 2px;
+    line-height: 43px;
+    text-align: center;
+
+    text-decoration: none;
+    color: #666;
+    cursor: pointer;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #fff;
+  }
+
+  .add {
+    display: list-item;
+  }
+
+  a.active {
+    border: 1px solid #5884fd;
+    color: #5884fd;
+  }
+
+}
+
+
+.portlet-placeholder {
+  border: 1px dashed #555;
+  float: left;
+  width: 94px;
+  height: 43px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu-props-area {
+  //color: #585f73;
+  position: absolute;
+  width: calc(100% - 30px);
+  //height: 218px;
+  bottom: 85px;
+  background-color: #fff;
+
+  .btn-delete {
+    &:link, &:visited {
+      color: $main-color;
+    }
+
+  }
+
+  .menu-title {
+    font-size: 14px;
+    //background: #ebeef2;
+    padding: 6px 12px;
+    margin-bottom: 15px;
+  }
+  .link-panel {
+    background: #ebeef2;
+    margin-top: 15px;
+    padding: 6px;
+  }
+}
+
+.design-img-container .design-img-box .design-img-box-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.design-img-container.layout-img-container .design-img-box.active .design-img-box-mask {
+    opacity: .6;
+    background: #000 url('/static/images/icon_card_selected.png') no-repeat 50% 50%;
+}
+
+.design-img-container.layout-img-container .design-img-box:hover {
+  cursor: pointer;
+  .design-img-box-mask {
+    opacity: .6;
+  }
+}
+
+
+.design-img-container.layout-img-container .design-img-box {
+  position: relative;
+  float: left;
+  width: 99px;
+  height: 118px;
+  margin: 0 15px 15px 0;
+
+  border: 1px solid #eee;
+  background: transparent url(/static/images/layout-c.png) no-repeat;
+}
+
+.menu-props-area .page-panel {
+  background: #ebeef2;
+  margin-top: 15px;
+  padding: 6px;
+}
+

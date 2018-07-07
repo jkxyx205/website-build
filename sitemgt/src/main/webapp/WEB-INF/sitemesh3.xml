@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+   
+    <!-- 指明满足“/*”的页面，将被"/WEB-INF/views/decorators/decorator.html"所装饰 -->
+    <!--<mapping path="/*" decorator="/WEB-INF/views/layouts/default.jsp" />-->
+ <!---->
+ 	<!--<mapping path="/login" exclude="true" />-->
+    <mapping path="/web/*" decorator="/WEB-INF/views/layout/web-default.jsp" />
+    <mapping path="/web/content/*" decorator="/WEB-INF/views/layout/inner-default.jsp"></mapping>
+    <mapping path="/web/*/content/*" decorator="/WEB-INF/views/layout/inner-default.jsp"></mapping>
+    <mapping path="/site/*" decorator="/WEB-INF/views/layout/site-default.jsp" />
+
+
+    <mapping path="/web/*/content/picDialog" exclude="true"></mapping>
+    <mapping path="/web/*/content/videoDialog" exclude="true"></mapping>
+    <mapping path="/web/*/content/pageDialog" exclude="true"></mapping>
+    <mapping path="/web/*/content/articleDialog" exclude="true"></mapping>
+
+    <mapping path="/web/*/view" exclude="true"></mapping>
+    <mapping path="/web/*/view/*" exclude="true"></mapping>
+
+    <mapping path="/web/*/design/componentDialog" exclude="true"></mapping>
+    <mapping path="/web/*/design/themeDialog/*" exclude="true"></mapping>
+    <mapping path="/web/*/design/headerDialog/*" exclude="true"></mapping>
+    <mapping path="/web/*/design/footerDialog/*" exclude="true"></mapping>
+    <mapping path="/web/*/design/layoutDialog" exclude="true"></mapping>
+    <mapping path="/web/*/design/layoutDialog2" exclude="true"></mapping>
+    <mapping path="/web/*/design/headerDialog" exclude="true"></mapping>
+    <mapping path="/web/*/design/footerDialog" exclude="true"></mapping>
+    <mapping path="/web/*/design/page/*" exclude="true"></mapping>
+    <mapping path="/web/*/design/settingDialog/*" exclude="true"></mapping>
+    <mapping path="/web/*/design/add/*" exclude="true"></mapping>
+
+
+    <content-processor>
+        <tag-rule-bundle class="com.rick.dev.plugin.sitemesh.MyFooterTagRuleBundle" />
+        <tag-rule-bundle class="com.rick.dev.plugin.sitemesh.OutTagRuleBundle" />
+    </content-processor>
+
+</sitemesh>

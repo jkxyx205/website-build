@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="keywords" content="$site.keywords" />
+    <meta name="description" content="$site.description" />
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="$fileServer/$site.favicon" />
+    <title>$site.title</title>
+    <link rel="stylesheet" href="$fileServer/static/css/reset.css">
+    <link rel="stylesheet" href="$fileServer/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_417789_082qiupqhvvx6r.css">
+    <link rel="stylesheet" href="$fileServer/static/plugins/drawer/css/drawer.min.css">
+    <link rel="stylesheet" href="$fileServer/static/plugins/Swiper-4.0.5/css/swiper.min.css">
+    <link rel="stylesheet" href="$fileServer/static/plugins/wow/animate.css">
+    <link rel="stylesheet" href="$fileServer/static/plugins/lightBox/css/lightbox.min.css">
+
+    <!-- style-->
+##    <link rel="stylesheet" tpl ="true" href="/static/tpl-css/$style">
+##    <link rel="stylesheet" tpl = "true" href="/static/tpl-css/$headerStyle">
+##    <link rel="stylesheet" tpl = "true" href="/static/tpl-css/$footerStyle">
+
+    <link rel="stylesheet" tpl ="true" id="styleCSSLink" href="$fileServer/tpl-css/$site.styleCSS">
+    <link rel="stylesheet" tpl ="true" id="headerCSSLink" href="$fileServer/tpl-css/$site.headerCSS">
+    <link rel="stylesheet" tpl ="true" id="footerCSSLink" href="$fileServer/tpl-css/$site.footerCSS">
+
+
+    <script src="$fileServer/static/js/jquery.min.js"></script>
+    <script src="$fileServer/static/plugins/Swiper-4.0.5/js/swiper.min.js"></script>
+
+</head>
+<body class="drawer drawer--left">
+
+    $siteBody
+
+##<div class="sider-bar" style="display: none;">
+##    <ul>
+##        <li><a href="/portal/$webId/index"><i class="iconfont icon-home"></i><span>返回首页</span></a></li>
+##        <li><a href=""><i class="iconfont icon-xiexin"></i><span>留言信息</span></a></li>
+##        <li><a href=""><i class="iconfont icon-buchongiconsvg02"></i><span>官方微信</span>
+##            <img src="$fileServer/$site.wechat" alt=""></a>
+##        </li>
+##        <li><a href=""><i class="iconfont icon-weibo"></i><span>官网微博</span>
+##            <img src="/download/1122" alt="">
+##        </a></li>
+##        <li><a href="javascript:$('html, body').animate({scrollTop:0}, 'slow'); "><i class="iconfont icon-zhiding"></i><span>返回顶部</span></a></li>
+##    </ul>
+##</div>
+
+
+
+<script src="$fileServer/static/plugins/lazyload/lazyload.min.js"></script>
+<script src="$fileServer/static/plugins/wow/wow.min.js"></script>
+<script src="$fileServer/static/plugins/drawer/drawer.js"></script>
+<script src="$fileServer/static/plugins/iscroll/iscroll.js"></script>
+<script src="$fileServer/static/plugins/layer/layer.js"></script>
+<script src="$fileServer/static/plugins/lightBox/js/lightbox.min.js"></script>
+<script src="$fileServer/static/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+<script src="$fileServer/static/js/holder.js"></script>
+
+
+<script>
+    var page = $pageJSON
+    var fileServer = '${fileServer}'
+    var webId = $site.id
+</script>
+<script src="$fileServer/static/js/web/design/web-base.js"></script>
+
+</body>
+</html>

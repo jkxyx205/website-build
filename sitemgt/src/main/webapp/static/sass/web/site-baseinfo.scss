@@ -1,0 +1,22 @@
+@import "../base";
+
+.form-horizontal.baseinfo {
+  padding-top: 50px;
+
+  .img-rounded {
+    height: 80px;
+    max-width: 1000px;
+  }
+
+  .btn-container {
+    margin-top: 20px;
+  }
+}
+
+#favicon-container {
+  display: inline-block;
+}
+
+.tip-info {
+  margin-top: 5px;
+}

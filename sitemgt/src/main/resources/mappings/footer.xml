@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yodean.site.web.tpl.footer">
+     
+	<select id="getFooters">
+	SELECT
+		id,
+		title,
+		html
+	FROM
+		w_footer t
+	WHERE
+		t.id = :id
+	AND t.del_flag = '1'
+    </select>
+
+	<select id="getFooterByWebId">
+		SELECT
+		t.id,
+		t.title,
+		t.html,
+		t.style_id AS styleId
+		FROM
+		w_footer t
+		INNER JOIN w_site s ON t.id = s.footer_id
+WHERE
+	s.id = :webId
+		AND t.del_flag = '1'
+	</select>
+</mapper>

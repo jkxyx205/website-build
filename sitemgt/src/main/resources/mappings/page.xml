@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yodean.site.web.tpl.page">
+     
+	<select id="getPageFrameHtml">
+	SELECT
+	id,
+	name,
+	html,
+	layout_id AS layoutId,
+	web_id AS webId
+FROM
+	w_page t
+WHERE EXISTS (select 1
+		FROM
+			w_menu
+		WHERE
+			w_menu.page_id = t.id AND w_menu.link_type = '1')
+	AND t.name = :name
+	AND t.web_id = :webId
+	AND t.del_flag = '1'
+    </select>
+
+
+	<select id="getComponentsByPageId">
+		SELECT
+	pc.id,
+	pc.page_id AS pageId,
+	pc.component_id AS componentId,
+	c.type AS contentType,
+	cc.title AS label,
+	pc.category_id AS categoryId,
+	pc.options
+FROM
+	w_page p,
+	w_page_component pc,
+	w_component c,
+	c_category cc
+WHERE
+	p.name = :name
+AND pc.component_id = c.id
+AND pc.category_id = cc.id
+AND p.id = :pageId
+AND p.web_id = :webId
+AND p.id = pc.page_id
+AND pc.del_flag = '1'
+And pc.id = :id
+	</select>
+
+
+	<select id="getDeletedComponentsByWebId">
+select wpc.id,
+	wpc.page_id AS pageId,
+	wpc.component_id AS componentId,
+	c.type AS contentType,
+	wpc.category_id AS categoryId,
+	cc.title as label,
+	wpc.options
+	from w_page_component wpc, w_page p, w_component c, c_category cc where p.web_id = :webId and p.id = wpc.page_id and cc.id = wpc.category_id
+AND wpc.component_id = c.id
+and not exists(
+select 1 from w_page_component pc
+ where pc.del_flag = '1' and wpc.category_id = pc.category_id
+GROUP BY pc.category_id HAVING(count(category_id) > 0 )
+)
+	</select>
+</mapper>

@@ -1,0 +1,196 @@
+@import "content-base";
+
+
+.photo-container {
+  margin-top: 16px;
+}
+
+div.photo-box {
+  border: 1px solid $split-color;
+  margin-bottom: 10px;
+
+  &.photo-box-add {
+    border: 2px dashed $split-color;
+    text-align: center;
+    height: 130px;
+    line-height: 130px;
+
+    button {
+      display: none;
+    }
+
+    &:hover {
+      .icon-add {
+        display: none;
+      }
+
+      button {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.icon-add {
+  font-size: 60px;
+  color: #ccc;
+}
+
+
+div.photo-box>a {
+  position: relative;
+  display: inline-block;
+  background-size: cover;
+  width: 100%;
+}
+
+div.photo-box .list-img {
+  width: 100%;
+}
+
+div.photo-title h6 {
+  height: 20px;
+  line-height: 20px;
+  width: 100%;
+  text-align: left;
+
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+  -webkit-text-overflow:ellipsis;
+  -moz-text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+  padding: 0 5px;
+}
+
+div.op-block {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #000;
+  bottom: 0;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  /* IE 5-7 */
+  filter: alpha(opacity=60);
+  /* Netscape */
+  -moz-opacity: 0.6;
+  /* Safari 1.x */
+  -khtml-opacity: 0.6;
+  /* Good browsers */
+  opacity: 0;
+
+  text-align: center;
+}
+
+div.photo-box>a:hover div.op-block {
+  opacity: 0.6;
+}
+
+div.photo-box>a:hover .op-block .iconfont {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+}
+
+div.op-bar {
+  position: absolute;
+  margin-left: -9999px;
+  width: 100%;
+}
+
+.label-drag {
+  position: absolute;
+  top: 5px;
+  left: -5px;
+  background-color: $main-color;
+  cursor: move;
+  padding: 0 2px;
+
+  i {
+    color: #fff;
+  }
+  opacity: 0;
+}
+
+
+.container-photo-box:hover .label-drag {
+  opacity: 1;
+}
+
+div.photo-box>a:hover div.op-bar {
+  margin-left: 0;
+  //left:50%;
+  //bottom: 50%;
+  //transform: translate(-50%, 0);
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+#cover-div {
+  //margin-top: 10px;
+  width: 188px;
+  //border: 1px dashed #CCC;
+  position: relative;
+}
+
+#cover {
+  width: 100%;
+}
+
+
+#files {
+  cursor: pointer;
+  position: absolute;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  filter:alpha(Opacity=0);
+  -moz-opacity:0;
+  opacity: 0;
+}
+
+#gallery>a {
+  display: none;
+}
+
+
+.photo-do>div {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  color: #b3b3b3;
+  border-top:1px solid #e7e7eb;
+
+}
+
+/*edit*/
+#edit-panel {
+  display: none;
+  padding: 20px;
+}
+
+.portlet-placeholder {
+  background-color: $main-color;
+  width: 2px;
+  height: 144px;
+  padding: 0;
+}
+
+#uploadifive-video_upload {
+  color: $main-color;
+  &:hover {
+    text-decoration: underline;
+  }
+
+}

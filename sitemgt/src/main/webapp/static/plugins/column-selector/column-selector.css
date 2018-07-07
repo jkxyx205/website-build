@@ -1,0 +1,27 @@
+.column-selector-container {
+  display: inline-block;
+}
+
+.column-selector-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.column-selector-container li {
+  /*display: inline-block;*/
+  float: left;
+  margin: 0 2px 2px 0;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #cfcfcf;
+  background: #eee;
+  cursor: pointer;
+}
+
+
+.column-selector-container .active {
+  border-color:  #00b3ee;
+  background: #eef8fb;
+}
